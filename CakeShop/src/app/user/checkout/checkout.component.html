@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Hàng</title>
+</head>
+<body>
+  <app-user-header></app-user-header>
+
+  <div class="checkout-container">
+    <h1 class="page-title">Thanh toán</h1>
+    
+    <!-- Hiển thị khi đặt hàng thành công -->
+    <div *ngIf="orderSuccess" class="order-success">
+      <div class="success-icon">
+        <i class="fa fa-check-circle"></i>
+      </div>
+      <h2 class="success-title">Đặt hàng thành công!</h2>
+      <p class="success-message">
+        Cảm ơn bạn đã đặt hàng. Đơn hàng #{{newOrderId}} của bạn đã được xác nhận.
+        <br>Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.
+      </p>
+      <div class="success-actions">
+        <button class="action-btn" (click)="viewOrderDetails()">
+          Xem đơn hàng
+        </button>
+        <button class="place-order-btn" (click)="continueShopping()">
+          Tiếp tục mua sắm
+        </button>
+      </div>
+    </div>
+    
+    <!-- Hiển thị khi giỏ hàng trống -->
+    <div *ngIf="!orderSuccess && (!cartItems || cartItems.length === 0)" class="empty-cart">
+      <div class="empty-cart-icon">
+        <i class="fa fa-shopping-cart"></i>
+      </div>
+      <p class="empty-cart-message">Giỏ hàng của bạn đang trống</p>
+      <button class="shop-now-btn" (click)="continueShopping()">
+        Mua sắm ngay
+      </button>
+    </div>
+    
+    <!-- Form thanh toán -->
+    <div *ngIf="!orderSuccess && cartItems && cartItems.length > 0" class="checkout-grid">
+      <!-- Thông tin đơn hàng -->
+      <div class="checkout-section">
+        <div class="section-header">
+          <h3>Thông tin đơn hàng</h3>
+        </div>
+        <div class="section-content">
+          <div class="cart-items">
+            <div class="cart-item" *ngFor="let item of cartItems">
+              <img [src]="item.ImageURL" alt="{{ item.ProductName }}" class="item-image">
+              <div class="item-details">
+                <div class="item-name">{{ item.ProductName }}</div>
+                <div class="item-price">{{ item.Price | currency:'VND':'symbol':'1.0-0' }}</div>
+                <div class="item-quantity">Số lượng: {{ item.Quantity }}</div>
+              </div>
+              <div class="item-total">
+                {{ item.TotalAmount | currency:'VND':'symbol':'1.0-0' }}
+              </div>
+            </div>
+          </div>
+          
+          <div class="cart-summary">
+            <div class="summary-row">
+              <span class="summary-label">Tạm tính</span>
+              <span class="summary-value">{{ TotalAmount | currency:'VND':'symbol':'1.0-0' }}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Phí vận chuyển</span>
+              <span class="summary-value">{{ shippingFee | currency:'VND':'symbol':'1.0-0' }}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Tổng cộng</span>
+              <span class="total-value">{{ (TotalAmount + shippingFee) | currency:'VND':'symbol':'1.0-0' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Thông tin thanh toán -->
+      <div class="checkout-section">
+        <div class="section-header">
+          <h3>Thông tin thanh toán</h3>
+        </div>
+        <div class="section-content">
+          <form [formGroup]="checkoutForm">
+            <div class="form-group">
+              <label class="form-label">Họ và tên</label>
+              <input 
+                type="text" 
+                formControlName="FullName" 
+                class="form-control" 
+                placeholder="Nhập họ và tên"
+              >
+              <div *ngIf="formControls['FullName'].touched && formControls['FullName'].invalid" class="error-message">
+                <span *ngIf="formControls['FullName'].errors?.['required']">Vui lòng nhập họ tên</span>
+                <span *ngIf="formControls['FullName'].errors?.['minlength']">Họ tên phải có ít nhất 3 ký tự</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Số điện thoại</label>
+              <input 
+                type="tel" 
+                formControlName="Phone" 
+                class="form-control" 
+                placeholder="Nhập số điện thoại"
+              >
+              <div *ngIf="formControls['Phone'].touched && formControls['Phone'].invalid" class="error-message">
+                <span *ngIf="formControls['Phone'].errors?.['required']">Vui lòng nhập số điện thoại</span>
+                <span *ngIf="formControls['Phone'].errors?.['pattern']">Số điện thoại không hợp lệ</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Địa chỉ nhận hàng</label>
+              <textarea 
+                formControlName="Address" 
+                class="form-control" 
+                rows="3" 
+                placeholder="Nhập địa chỉ nhận hàng"
+              ></textarea>
+              <div *ngIf="formControls['Address'].touched && formControls['Address'].invalid" class="error-message">
+                <span *ngIf="formControls['Address'].errors?.['required']">Vui lòng nhập địa chỉ</span>
+                <span *ngIf="formControls['Address'].errors?.['minlength']">Địa chỉ phải có ít nhất 10 ký tự</span>
+              </div>
+            </div>
+            
+          
+            
+            <div class="form-group">
+              <label class="form-label">Phương thức thanh toán</label>
+              <div class="payment-methods">
+                <div 
+                  class="payment-method" 
+                  [class.selected]="checkoutForm.value.PaymentMethod === 'cod'"
+                  (click)="selectPaymentMethod('cod')"
+                >
+                  <div class="payment-radio">
+                    <input 
+                      type="radio" 
+                      formControlName="PaymentMethod" 
+                      value="cod" 
+                      id="payment-cod"
+                    >
+                  </div>
+                  <div class="payment-info">
+                    <div class="payment-title">Thanh toán khi nhận hàng</div>
+                    <div class="payment-description">Thanh toán bằng tiền mặt khi nhận hàng</div>
+                  </div>
+                  <div class="payment-icon">
+                    <i class="fa fa-money"></i>
+                  </div>
+                </div>
+                
+                <div 
+                  class="payment-method" 
+                  [class.selected]="checkoutForm.value.PaymentMethod === 'bank'"
+                  (click)="selectPaymentMethod('bank')"
+                >
+                  <div class="payment-radio">
+                    <input 
+                      type="radio" 
+                      formControlName="PaymentMethod" 
+                      value="bank" 
+                      id="payment-bank"
+                    >
+                  </div>
+                  <div class="payment-info">
+                    <div class="payment-title">Chuyển khoản ngân hàng</div>
+                    <div class="payment-description">Thanh toán qua chuyển khoản ngân hàng</div>
+                  </div>
+                  <div class="payment-icon">
+                    <i class="fa fa-university"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Thông tin chuyển khoản -->
+            <div *ngIf="checkoutForm.value.PaymentMethod === 'bank'" class="bank-details">
+              <p><strong>Tên ngân hàng:</strong> Vietcombank</p>
+              <p><strong>Tên tài khoản:</strong> Đặng Lê Hoài Trung</p>
+              <p><strong>Số tài khoản:</strong> 1055095446</p>
+              <p><strong>Nội dung chuyển khoản:</strong> Thanh toán đơn hàng [Họ tên]</p>
+            </div>
+          
+            <!-- Thông tin chuyển khoản và upload ảnh chứng minh -->
+            <div *ngIf="checkoutForm.value.PaymentMethod === 'bank'" class="bank-details">
+              <p><strong>Tên ngân hàng:</strong> Vietcombank</p>
+              <p><strong>Tên tài khoản:</strong> Đặng Lê Hoài Trung</p>
+              <p><strong>Số tài khoản:</strong> 1055095446</p>
+              <p><strong>Nội dung chuyển khoản:</strong> Thanh toán đơn hàng [Họ tên]</p>
+              
+              <!-- Phần upload ảnh chứng minh thanh toán -->
+              <div class="payment-proof-section">
+                <label class="form-label">
+                  <i class="fa fa-camera"></i> Ảnh chứng minh thanh toán
+                </label>
+                
+                <!-- Input chọn file -->
+                <div class="file-upload-container">
+                  <input 
+                    type="file" 
+                    #fileInput 
+                    (change)="onFileSelected($event)" 
+                    accept="image/*" 
+                    class="file-input"
+                    id="payment-proof"
+                  >
+                  <label for="payment-proof" class="file-upload-label">
+                    <i class="fa fa-cloud-upload"></i>
+                    <span>{{ selectedFile ? selectedFile.name : 'Chọn ảnh chứng minh thanh toán' }}</span>
+                  </label>
+                </div>
+                
+                <!-- Preview ảnh đã chọn -->
+                <div *ngIf="imagePreview" class="image-preview">
+                  <img [src]="imagePreview" alt="Preview" class="preview-image">
+                </div>
+                
+                <!-- Thanh tiến trình upload -->
+                <div *ngIf="uploadProgress > 0 && uploadProgress < 100" class="upload-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" [style.width.%]="uploadProgress"></div>
+                  </div>
+                  <span class="progress-text">{{ uploadProgress }}%</span>
+                </div>
+                
+                <!-- Nút upload -->
+                <button 
+                  *ngIf="selectedFile && !uploadedImageUrl" 
+                  type="button" 
+                  class="upload-btn"
+                  (click)="uploadImage()"
+                  [disabled]="isUploading"
+                >
+                  <i class="fa fa-upload"></i>
+                  {{ isUploading ? 'Đang tải lên...' : 'Tải lên ảnh' }}
+                </button>
+                
+                <!-- Thông báo upload thành công -->
+                <div *ngIf="uploadedImageUrl" class="upload-success">
+                  <i class="fa fa-check-circle"></i>
+                  Tải lên thành công!
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="checkout-actions">
+            <a href="javascript:void(0)" class="back-to-cart" (click)="backToCart()">
+              <i class="fa fa-arrow-left"></i> Quay lại giỏ hàng
+            </a>
+            <button 
+              class="place-order-btn" 
+              [disabled]="checkoutForm.invalid || isSubmitting" 
+              (click)="placeOrder()"
+            >
+              <span *ngIf="!isSubmitting">Đặt hàng</span>
+              <span *ngIf="isSubmitting">
+                <i class="fa fa-spinner fa-spin"></i> Đang xử lý...
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <app-user-footer></app-user-footer>
+  
+    
+</body>
+</html>

@@ -1,0 +1,119 @@
+<app-user-header></app-user-header>
+
+<div class="cart-page">
+  <h1 class="page-title">Giỏ hàng của bạn</h1>
+  
+  <!-- Cart content when items exist -->
+  <div class="cart-layout" *ngIf="cartItems.length > 0; else emptyCart">
+    <!-- Cart items section -->
+    <div class="cart-items">
+      <div class="cart-header">
+        <h2 class="cart-title">Sản phẩm</h2>
+        <span class="cart-count">{{ cartItems.length }} sản phẩm</span>
+      </div>
+      
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Tổng tiền</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems">
+            <td data-label="Sản phẩm" class="product-cell">
+              <img [src]="item.ImageURL" alt="{{ item.ProductName }}" class="product-image">
+              <div class="product-info">
+                <h3 class="product-name">{{ item.ProductName }}</h3>
+                <div class="product-category" *ngIf="item.CategoryName">{{ item.CategoryName }}</div>
+              </div>
+            </td>
+            <td data-label="Giá" class="price-cell">
+              {{ item.Price | number:'1.0-0' }} VND
+            </td>
+            <td data-label="Số lượng">
+              <div class="quantity-controls">
+                <button 
+                  class="quantity-btn" 
+                  (click)="updateQuantity(item.ProductID, item.Quantity - 1)" 
+                  [disabled]="item.Quantity <= 1">
+                  <i class="fa fa-minus"></i>
+                </button>
+                <input 
+                  type="number" 
+                  [(ngModel)]="item.Quantity" 
+                  (change)="updateQuantity(item.ProductID, item.Quantity)" 
+                  class="quantity-input" 
+                  min="1"
+                  [max]="item.MaxQuantity || 99">
+                <button 
+                  class="quantity-btn" 
+                  (click)="updateQuantity(item.ProductID, item.Quantity + 1)"
+                  [disabled]="item.Quantity >= (item.MaxQuantity || 99)">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div>
+            </td>
+            <td data-label="Tổng tiền" class="total-cell">
+              {{ (item.Price * item.Quantity) | number:'1.0-0' }} VND
+            </td>
+            <td class="action-cell">
+              <button class="remove-btn" (click)="removeFromCart(item.ProductID)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Cart summary section -->
+    <div class="cart-summary">
+      <div class="summary-header">
+        <h2 class="summary-title">Tổng đơn hàng</h2>
+      </div>
+      <div class="summary-content">
+        <div class="summary-row">
+          <span class="summary-label">Tạm tính</span>
+          <span class="summary-value">{{ totalAmount | number:'1.0-0' }} VND</span>
+        </div>
+        
+        <div class="summary-total">
+          <span class="total-label">Tổng cộng</span>
+          <span class="total-value">{{ totalAmount| number:'1.0-0' }} VND</span>
+        </div>
+    
+        
+        <!-- Checkout button -->
+        <button class="checkout-btn" (click)="goToCheckout()">
+          <i class="fa fa-credit-card"></i>
+          Thanh toán
+        </button>
+        
+        <a href="javascript:void(0)" class="continue-shopping" (click)="goBack()">
+          <i class="fa fa-arrow-left"></i> Tiếp tục mua sắm
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Empty cart state -->
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <div class="empty-cart-icon">
+        <i class="fa fa-shopping-cart"></i>
+      </div>
+      <h2 class="empty-cart-title">Giỏ hàng của bạn đang trống</h2>
+      <p class="empty-cart-message">Hãy thêm sản phẩm vào giỏ hàng để tiếp tục mua sắm</p>
+      <button class="shop-now-btn" (click)="goBack()">
+        <i class="fa fa-shopping-bag"></i>
+        Mua sắm ngay
+      </button>
+    </div>
+  </ng-template>
+</div>
+
+<app-user-footer></app-user-footer>

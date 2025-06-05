@@ -1,0 +1,42 @@
+<div class="container mt-4">
+    <div class="container">
+      <h2>Danh sách đơn hàng</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Ngày đặt</th>
+            <th>Người dùng</th>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Tổng</th>
+            <th>Trạng thái</th>
+            <th>Cập nhật</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.OrderID }}</td>
+            <td>{{ order.OrderDate | date:'dd/MM/yyyy' }}</td>
+            <td>{{ order.UserID }}</td>
+            <td>{{ order.ProductName }}</td>
+            <td>{{ order.Quantity }}</td>
+            <td>{{ order.Price | number:'1.0-0' }}</td>
+            <td>{{ order.TotalAmount | number:'1.0-0' }}</td>
+            <td>
+              <select [(ngModel)]="order.Status">
+                <option>Pending</option>
+                <option>Processing</option>
+                <option>Completed</option>
+                <option>Cancelled</option>
+              </select>
+            </td>
+            <td>
+              <button (click)="updateStatus(order)">Lưu</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  

@@ -1,0 +1,97 @@
+<app-user-header></app-user-header>
+
+<div class="product-container">
+  <div class="product-layout">
+    <!-- Product Gallery Section -->
+    <div class="product-gallery">
+      <div class="main-image-container">
+        <div class="image-overlay" *ngIf="product?.Quantity < 5 && product?.Quantity > 0">Còn ít hàng</div>
+        <div class="image-overlay" *ngIf="product?.Quantity <= 0">Hết hàng</div>
+        <img [src]="product?.ImageURL" alt="{{ product?.ProductName }}" class="main-image">
+      </div>
+
+    </div>
+    
+    <!-- Product Info Section -->
+    <div class="product-info">
+      <div class="product-category">{{ product?.CategoryName }}</div>
+      <h1 class="product-title">{{ product?.ProductName }}</h1>
+      <h2 class="product-price">{{ product?.Price | number:'1.0-0' }} VND</h2>
+      
+      <p class="product-description">Mô Tả: {{ product?.Description }}</p>
+      
+      <div class="product-meta">
+        <div class="meta-item">
+          <i class="fa fa-check-circle"></i>
+          <span *ngIf="product?.Quantity > 10" class="product-stock in-stock">Còn hàng ({{ product?.Quantity }} sản phẩm)</span>
+          <span *ngIf="product?.Quantity <= 10 && product?.Quantity > 0" class="product-stock low-stock">Còn ít hàng ({{ product?.Quantity }} sản phẩm)</span>
+          <span *ngIf="product?.Quantity <= 0" class="product-stock out-of-stock">Hết hàng</span>
+        </div>
+        <div class="meta-item">
+          <i class="fa fa-truck"></i>
+          <span>Giao hàng miễn phí cho đơn hàng từ 500.000 VND</span>
+        </div>
+        <div class="meta-item">
+          <i class="fa fa-undo"></i>
+          <span>Đổi trả trong vòng 7 ngày</span>
+        </div>
+      </div>
+      
+      <!-- Quantity Selector -->
+      <div class="quantity-selector">
+        <span class="quantity-label">Số lượng:</span>
+        <div class="quantity-controls">
+          <button 
+            class="quantity-btn" 
+            (click)="decreaseQuantity()" 
+            [disabled]="quantity <= 1">
+            <i class="fa fa-minus"></i>
+          </button>
+          <input 
+            type="number" 
+            class="quantity-input" 
+            [(ngModel)]="quantity" 
+            min="1" 
+            [max]="product?.Quantity || 1"
+            readonly>
+          <button 
+            class="quantity-btn" 
+            (click)="increaseQuantity()" 
+            [disabled]="quantity >= product?.Quantity">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="product-actions">
+        <button 
+          class="btn btn-primary" 
+          (click)="addToCart(product)" 
+          [disabled]="product?.Quantity <= 0">
+          <i class="fa fa-shopping-cart"></i>
+          Thêm vào giỏ hàng
+        </button>
+        <button class="btn btn-secondary" (click)="goBack()">
+          <i class="fa fa-arrow-left"></i>
+          Quay lại
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Product Tabs -->
+  <div class="product-tabs">
+    <div class="tabs-header">
+      <button class="tab-btn active" data-tab="description">Mô tả sản phẩm</button>
+    </div>
+    
+    <div id="description" class="tab-content active">
+      <p>{{ product?.Description }}</p>
+    </div>
+  
+  </div>
+  
+</div>
+
+<app-user-footer></app-user-footer>

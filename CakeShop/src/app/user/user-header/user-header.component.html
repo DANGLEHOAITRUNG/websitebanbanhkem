@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Trang Home</title>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img routerLink="/user/home" src="https://th.bing.com/th/id/OIP.AAzY5ATfCbt38CXzRhPFtAHaHa?rs=1&pid=ImgDetMain" alt="Logo" />
+      <span class="brand-name">CakeShop</span>
+    </div> 
+    <div class="user-actions">
+      <ng-container *ngIf="isLoggedIn; else loginLink">
+        <div class="greeting-container">
+          <div class="greeting">
+            Xin chào, <strong>{{ userName }}</strong>
+          </div>
+        </div>
+        <div class="account-menu">
+          <button class="account-label">Tài khoản</button>
+          <div class="dropdown-content">
+            <a [routerLink]="['/user-profile', userId]">Tài khoản của tôi</a>
+            <a routerLink="/checkout-detail">Lịch sử mua hàng</a>
+            <a (click)="logout()">Đăng Xuất</a>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #loginLink>
+        <a routerLink="/login" class="login">Đăng nhập</a>
+      </ng-template>
+    </div>
+  </header>
+  
+  <section>
+    <nav class="menu">
+      <a routerLink="/user/home">Trang chủ</a>
+      <a routerLink="/about">Giới Thiệu</a>
+      <a routerLink="/contact">Liên Hệ</a>
+      <a routerLink="/user-cart" class="cart-icon">
+        Giỏ Hàng <i class="fa fa-shopping-cart"></i> (<span>{{ cartCount }}</span>)
+      </a>
+    </nav>
+  </section>
+  
+  
+</body>
+</html>
+    

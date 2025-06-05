@@ -1,0 +1,87 @@
+.footer {
+    display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử theo hàng */
+    justify-content: space-between; /* Căn chỉnh các phần tử đều nhau */
+    align-items: flex-start; /* Căn chỉnh các phần tử theo chiều dọc */
+    background-color: #fce4ec; /* Màu nền dễ thương */
+    padding: 40px 20px;
+    border-top: 2px solid #ff4081; /* Đường viền trên dễ thương */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap; /* Cho phép các phần tử xuống dòng nếu không đủ chỗ */
+  }
+  
+  .footer > div {
+    flex: 1; /* Mỗi phần tử chiếm 1 phần không gian */
+    min-width: 200px; /* Đặt chiều rộng tối thiểu cho mỗi phần tử */
+    margin: 10px; /* Khoảng cách giữa các phần tử */
+  }
+  
+  .footer h3 {
+    margin-bottom: 15px;
+    color: #ff4081; /* Màu chữ tiêu đề dễ thương */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Phông chữ dễ thương */
+  }
+  
+  .quick-links ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .quick-links li {
+    margin: 5px 0;
+  }
+  
+  .quick-links a {
+    text-decoration: none;
+    color: #ff4081; /* Màu chữ liên kết dễ thương */
+    transition: color 0.3s;
+  }
+  
+  .quick-links a:hover {
+    color: #e91e63; /* Màu khi hover */
+  }
+  
+  .newsletter input {
+    padding: 10px;
+    margin-right: 5px;
+    border: 2px solid #ff4081; /* Đường viền dễ thương */
+    border-radius: 20px; /* Bo tròn */
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .newsletter input:focus {
+    border-color: #e91e63; /* Màu khi focus */
+  }
+  
+  .newsletter button {
+    padding: 10px 15px;
+    background-color: #ff4081; /* Nền nút dễ thương */
+    color: white;
+    border: none;
+    border-radius: 20px; /* Bo tròn */
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .newsletter button:hover {
+    background-color: #e91e63; /* Màu khi hover */
+  }
+  
+  .social-media a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #ff4081; /* Màu chữ dễ thương */
+    transition: color 0.3s;
+  }
+  
+  .social-media a:hover {
+    color: #e91e63; /* Màu khi hover */
+  }
+  
+  .copyright {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #6c757d; /* Màu chữ bản quyền */
+    text-align: center; /* Căn giữa chữ bản quyền */
+    width: 100%; /* Đảm bảo bản quyền chiếm toàn bộ chiều rộng */
+  }

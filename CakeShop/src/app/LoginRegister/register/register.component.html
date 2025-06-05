@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="container"> 
+  <div class="form signup">
+      <h2>Sign Up</h2>
+      <div class="inputBox">
+          <input type="text" required="required" [(ngModel)]="userName" />
+          <i class="fa fa-user"></i>
+          <span>Username</span>
+      </div>
+      <div class="inputBox"> 
+          <input type="text" required="required" [(ngModel)]="email" />
+          <i class="fa fa-envelope"></i>
+          <span>Email Address</span>
+      </div>
+      <div class="inputBox"> 
+          <input type="text" required="required" [(ngModel)]="phone" />
+          <i class="fa fa-phone"></i>
+          <span>Phone</span>
+      </div>
+      <div class="inputBox"> 
+          <input type="text" required="required" [(ngModel)]="address" />
+          <i class="fa fa-map-marker-alt"></i>
+          <span>Address</span>
+      </div>
+      <div class="inputBox">
+          <input type="password" required="required" [(ngModel)]="passWord" />
+          <i class="fa fa-lock"></i>
+          <span>Password</span>
+      </div>
+      <div class="inputBox">
+          <input type="password" required="required" [(ngModel)]="confirmPassword" >
+          <i class="fa fa-lock"></i>
+          <span>Confim Password</span>
+      </div>
+      <div class="agree">
+          <input type="checkbox" [(ngModel)]="isAgreed" id="agree" />
+          <label for="agree">I agree to the <a href="#">privacy policy</a>.</label>
+      </div>
+      <div class="inputBox">
+          <button class="submit" (click)="dangKy()" >Đăng Ký</button>
+      </div>
+      <p> Đã tài khoản ? <a [routerLink]="['/login']" >ĐăngNhập </a></p>
+  </div>
+ </div>
+</body>
+</html>

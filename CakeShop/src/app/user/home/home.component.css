@@ -1,0 +1,94 @@
+body {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: space-between; /* Căn giữa các phần tử */
+    background-color: #ffebee; /* Màu nền dễ thương */
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1; /* Cho phép menu chiếm không gian còn lại */
+    justify-content: center; /* Căn giữa các mục trong menu */
+  }
+  
+  .menu li {
+    position: relative; /* Để submenu có thể được căn chỉnh */
+    margin: 0 15px; /* Khoảng cách giữa các mục */
+  }
+  
+  .menu a {
+    text-decoration: none;
+    color: #ff4081; /* Màu chữ dễ thương */
+    font-weight: bold;
+    transition: color 0.3s;
+    display: flex; /* Sử dụng flex để căn giữa chữ */
+    align-items: center; /* Căn giữa chữ theo chiều dọc */
+  }
+  
+  .menu a:hover {
+    color: #e91e63; /* Màu khi hover */
+  }
+  
+  .submenu {
+    display: none; /* Ẩn submenu mặc định */
+    position: absolute; /* Để căn chỉnh submenu */
+    top: 100%; /* Đặt submenu dưới menu chính */
+    left: 0;
+    background-color: #ffebee; /* Màu nền cho submenu */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Đảm bảo submenu nằm trên các phần tử khác */
+  }
+  
+  .menu li:hover .submenu {
+    display: block; /* Hiện submenu khi hover vào menu chính */
+  }
+  
+  .submenu li {
+    margin: 5px 0; /* Khoảng cách giữa các mục trong submenu */
+  }
+  
+  .submenu a {
+    font-weight: normal; /* Đặt font-weight cho các mục trong submenu */
+  }
+  .banner {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  
+  .banner-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  /* review */
+  

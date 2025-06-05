@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #233243;
+    color: #fff;
+}
+
+.container {
+    width: 400px; /* Tăng độ rộng của container */
+    max-width: 100%; /* Đảm bảo không vượt quá kích thước màn hình */
+    padding: 60px 70px; /* Tăng padding để thêm chiều dài */
+    border-radius: 20px;
+    border: 8px solid #233243;
+    background: #2e3b4e;
+    color: #fff;
+    box-shadow: -5px -5px 15px rgba(255, 255, 255, .1),
+                -5px -5px 15px rgba(0, 0, 0, .35),
+                inset -5px -5px 15px rgba(255, 255, 255, .1),
+                inset -5px -5px 15px rgba(0, 0, 0, .35);
+}
+
+.form.signin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.form.signin h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.inputBox {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 10px;
+    padding-left: 30px;
+    border: none;
+    outline: none;
+    background: #233243;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.inputBox i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+}
+
+.inputBox span {
+    position: absolute;
+    top: -20px;
+    left: 5px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.submit {
+    background: #4e8cff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 auto; /* Căn giữa nút */
+    display: block; 
+    transition: 0.3s;
+}
+
+.submit:hover {
+    background: #3578e5;
+}
+
+.form.signin p {
+    color: #ccc;
+}
+
+.form.signin p a {
+    color: #4e8cff;
+    text-decoration: none;
+}
+
+.form.signin p a:hover {
+    text-decoration: underline;
+}

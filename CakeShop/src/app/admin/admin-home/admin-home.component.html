@@ -1,0 +1,39 @@
+<div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="logo" routerLink="/admin/dashboard">
+        <span>Quản Trị Viên</span>
+      </div>
+  
+      <nav class="admin-nav">
+        <a class="admin-card" routerLink="/admin/admin-home/product-management">Quản Lý Sản Phẩm</a>
+        <a class="admin-card" routerLink="/admin/admin-home/category-management">Quản Lý Danh Mục</a>
+        <a class="admin-card" routerLink="/admin/admin-home/customer-management">Quản Lý Người Dùng</a>
+        <a class="admin-card" routerLink="/admin/admin-home/order-management">Quản Lý Đơn Hàng</a>
+        <a (click)="logout()" class="logout">Đăng Xuất</a>
+      </nav>
+    </aside>
+  
+    <!-- Main content -->
+    <div class="admin-content">
+      <!-- Header -->
+      <header class="admin-header">
+        <img src="https://th.bing.com/th/id/OIP.AAzY5ATfCbt38CXzRhPFtAHaHa?rs=1&pid=ImgDetMain" alt="">
+        <h1>CakeShop</h1>
+        <div class="admin-profile">
+          <span>Xin chào, Admin</span>
+        </div>
+      </header>
+  
+      <!-- Main Section -->
+      <main class="admin-main">
+        <router-outlet></router-outlet>
+      </main>
+  
+      <!-- Footer -->
+      <footer class="admin-footer">
+        <p>&copy; 2025 Cake Shop. Tất cả quyền được bảo lưu.</p>
+      </footer>
+    </div>
+  </div>
+  

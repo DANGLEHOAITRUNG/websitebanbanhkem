@@ -1,0 +1,140 @@
+/*  Reset & Body full-screen style */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #ffe4ec, #fcd5ce, #fff0f5);
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Header & Footer placeholder styling */
+app-user-header,
+app-user-footer {
+  width: 100%;
+  background-color: #fff;
+  padding: 5px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 5px 10px rgba(255, 105, 180, 0.2);
+}
+
+/* User Profile Container */
+.user-profile {
+  width: 100%;
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #fff0f8;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 8px 25px rgba(255, 182, 193, 0.4);
+  animation: fadeIn 0.4s ease-in;
+}
+
+/*  Heading */
+.user-profile h2 {
+  text-align: center;
+  color: #ff69b4;
+  margin-bottom: 25px;
+}
+
+/*  Label & Inputs */
+.user-profile label {
+  display: block;
+  margin: 12px 0 5px;
+  font-weight: bold;
+  color: #d63384;
+}
+
+.user-profile input[type="text"],
+.user-profile input[type="email"],
+.user-profile input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #ffc0cb;
+  border-radius: 20px;
+  background-color: #fffafd;
+  font-size: 15px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.user-profile input:focus {
+  outline: none;
+  border-color: #ff69b4;
+  box-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+}
+
+/*  Button styling */
+.user-profile button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffb6c1;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.user-profile button:hover {
+  background-color: #ff69b4;
+}
+
+/*  HR Styling */
+.user-profile hr {
+  margin: 30px 0;
+  border: none;
+  border-top: 3px dashed #ffc0cb;
+}
+.btn-back {
+  height: 30px;
+  width: 150px;
+  margin-top: 10px;
+  background-color: #ffecf2;
+  color: #ff69b4;
+  border-radius: 5px;
+  border: 2px solid #ff69b4;
+}
+
+.btn-back:hover {
+  background-color: #ffb6c1;
+  color: white;
+}
+
+/*  Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*  Mobile Responsive */
+@media (max-width: 768px) {
+  .user-profile {
+    padding: 25px;
+    margin: 20px;
+  }
+
+  .user-profile h2 {
+    font-size: 1.4rem;
+  }
+
+  .user-profile input,
+  .user-profile button {
+    font-size: 14px;
+  }
+}

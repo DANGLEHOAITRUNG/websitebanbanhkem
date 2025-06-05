@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông Tin Khách Hàng</title>
+</head>
+<body>
+  <app-user-header></app-user-header>
+
+  <button class="btn-back" (click)="goBack()">Quay lại</button>
+  <div class="user-profile" *ngIf="user">
+    
+    <h2>Thông tin khách hàng</h2>
+    <form (ngSubmit)="updateCustomerInfo()">
+      <label>Họ và tên:</label>
+      <input type="text" [(ngModel)]="user.FullName" name="fullName" required />
+  
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="user.Email" name="email" required />
+  
+      <label>Số điện thoại:</label>
+      <input type="text" [(ngModel)]="user.Phone" name="phone" required />
+  
+      <label>Địa chỉ:</label>
+      <input type="text" [(ngModel)]="user.Address" name="address" required />
+  
+      <button type="submit">Cập nhật thông tin</button>
+    </form>
+  
+    <hr />
+  
+    <h2>Đổi mật khẩu</h2>
+    <form (ngSubmit)="changePassword()">
+      <label>Mật khẩu hiện tại:</label>
+      <form (ngSubmit)="changePassword()">
+        <input [(ngModel)]="oldPassword" name="oldPassword" type="password" placeholder="Mật khẩu cũ">
+  
+        <label>Mật khẩu mới:</label>
+        <input [(ngModel)]="newPassword" name="newPassword" type="password" placeholder="Mật khẩu mới">
+        
+        <button type="submit">Đổi mật khẩu</button>
+      </form>
+    </form>
+  </div>
+
+  <app-user-footer></app-user-footer>
+</body>
+</html>

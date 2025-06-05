@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <h2>Danh Sách Sản Phẩm</h2>
+    <button routerLink="/admin/admin-home/product-add" class="btn btn-primary">Thêm Sản Phẩm</button>
+  
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tên</th>
+          <th>Giá</th>
+          <th>Số Lượng</th>
+          <th>Tên Danh Mục</th>
+          <th>Mô Tả</th>
+          <th>Hình Ảnh</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.ProductID }}</td>
+          <td>{{ product.ProductName }}</td>
+          <td>{{ product.Price | number:'1.0-0' }} VND</td>
+          <td>{{ product.Quantity }}</td>
+          <td>{{ product.CategoryName }}</td>
+          <td>{{ product.Description }}</td>
+          <td>
+            <img [src]="product.ImageURL" alt="Hình ảnh sản phẩm" class="product-image" *ngIf="product.ImageURL; else noImage">
+            <ng-template #noImage>Không có ảnh</ng-template>
+          </td>
+          <td>
+              <button [routerLink]="['/admin/admin-home/product-edit', product.ProductID]" class="btn btn-warning btn-sm">
+                Sửa
+              </button>
+            <button (click)="deleteProduct(product.ProductID)" class="btn btn-danger btn-sm">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

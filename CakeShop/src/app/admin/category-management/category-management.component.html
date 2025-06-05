@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Danh Mục</title>
+</head>
+<body>
+  <div class="container">
+    <h2>Quản lý Danh Mục</h2>
+  
+    <!-- Thêm Danh Mục -->
+    <div class="form-group">
+      <input type="text" [(ngModel)]="newCategory.categoryName" placeholder="Tên danh mục" />
+      <button (click)="addCategory()">Thêm</button>
+    </div>
+  
+    <hr />
+  
+    <!-- Danh Sách Danh Mục -->
+    <table border="1" class="category-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tên Danh Mục</th>
+          <th>Hành Động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td>{{ category.CategoryID }}</td>
+          <td>{{ category.CategoryName }}</td>
+          <td>
+            <button (click)="selectCategory(category)">Sửa</button>
+            <button (click)="deleteCategory(category.CategoryID)">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Form Cập Nhật -->
+    <div *ngIf="selectedCategory" class="update-form">
+      <h3>Cập nhật danh mục</h3>
+      <input type="text" [(ngModel)]="selectedCategory.CategoryName" />
+      <button (click)="updateCategory()">Cập Nhật</button>
+      <button (click)="selectedCategory = null">Hủy</button>
+    </div>
+  </div>
+</body>
+</html>
+
+  

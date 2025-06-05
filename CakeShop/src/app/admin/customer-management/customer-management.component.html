@@ -1,0 +1,38 @@
+<h1>Danh Sách Người Dùng</h1>
+<button routerLink="/admin/admin-home/customer-add" class="btn btn-primary">Thêm tài khoản</button>
+
+<button routerLink="/admin/admin-home/customer-management" class="btn btn-secondary ms-2">Quay lại</button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Role ID</th>
+      <th>Hành động</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of Customer">
+      <td>{{ customer.UserID }}</td>
+      <td>{{ customer.Username }}</td>
+      <td>{{ customer.Email }}</td>
+      <td>{{ customer.RoleID }}</td>
+      <td>
+        <a [routerLink]="['/admin/admin-home/customer-detail', customer.UserID]" class="btn btn-info btn-sm">
+            Chi tiết
+          </a>
+          <a [routerLink]="['/admin/admin-home/customer-edit', customer.UserID]" class="btn btn-warning btn-sm">
+            Sửa
+          </a>
+        <button (click)="deleteUser(customer.UserID)" class="btn btn-danger btn-sm">Xóa</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Thêm thông báo khi không có dữ liệu -->
+<div *ngIf="Customer.length === 0" class="alert alert-warning mt-3">
+  Không có tài khoản nào được tìm thấy.
+</div>

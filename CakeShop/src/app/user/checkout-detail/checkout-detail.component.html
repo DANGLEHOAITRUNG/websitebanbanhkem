@@ -1,0 +1,177 @@
+<app-user-header></app-user-header>
+
+<div class="order-container">
+  <!-- Danh sách đơn hàng -->
+  <div *ngIf="!selectedOrder">
+    <h1 class="page-title">Đơn hàng của bạn</h1>
+    
+    <div class="order-list-container">
+      <div class="order-filters">
+        <div class="search-box">
+          <i class="fa fa-search"></i>
+          <input 
+            type="text" 
+            [(ngModel)]="searchTerm" 
+            (input)="onSearchChange()" 
+            placeholder="Tìm kiếm theo mã đơn hoặc trạng thái..."
+          >
+        </div>
+        
+      </div>
+      
+      <div *ngIf="isLoading" class="empty-state">
+        <div class="empty-state-icon">
+          <i class="fa fa-spinner fa-spin"></i>
+        </div>
+        <p>Đang tải dữ liệu...</p>
+      </div>
+      
+      <div *ngIf="!isLoading && filteredOrders.length === 0" class="empty-state">
+        <div class="empty-state-icon">
+          <i class="fa fa-shopping-bag"></i>
+        </div>
+        <p>Không tìm thấy đơn hàng nào</p>
+      </div>
+      
+      <table *ngIf="!isLoading && filteredOrders.length > 0" class="orders-table">
+        <thead>
+          <tr>
+            <th>Mã đơn</th>
+            <th>Ngày đặt</th>
+            <th>Trạng thái</th>
+            <th>Tổng tiền</th>
+            <th>Tác vụ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of paginatedOrders">
+            <td class="order-id">#{{ order.OrderID }}</td>
+            <td class="order-date">{{ formatDate(order.OrderDate) }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="getOrderStatusClass(order.Status)">
+                {{ order.Status }}
+              </span>
+            </td>
+            <td>{{ order.TotalAmount | currency:'VND':'symbol':'1.0-0' }}</td>
+            <td>
+              <button class="action-btn" (click)="viewOrderDetail(order.OrderID)">
+                Xem chi tiết
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div *ngIf="!isLoading && filteredOrders.length > itemsPerPage" class="pagination">
+        <button 
+          class="page-btn" 
+          [disabled]="currentPage === 1" 
+          (click)="setPage(currentPage - 1)"
+        >
+          &laquo;
+        </button>
+        
+        <button 
+          *ngFor="let page of getPages()" 
+          class="page-btn" 
+          [class.active]="page === currentPage" 
+          (click)="setPage(page)"
+        >
+          {{ page }}
+        </button>
+        
+        <button 
+          class="page-btn" 
+          [disabled]="currentPage === totalPages" 
+          (click)="setPage(currentPage + 1)"
+        >
+          &raquo;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chi tiết đơn hàng -->
+  <div *ngIf="selectedOrder" class="order-detail-container">
+    <button class="back-btn" (click)="backToList()">
+      <i class="fa fa-arrow-left"></i> Quay lại danh sách
+    </button>
+    
+    <div class="order-header">
+      <div class="order-header-left">
+        <h2>Chi tiết đơn hàng #{{ selectedOrder.OrderID }}</h2>
+        <div class="order-meta">
+          Đặt ngày {{ formatDate(selectedOrder.OrderDate) }}
+        </div>
+      </div>
+      
+    </div>
+    
+    <div class="order-info">
+      <div class="info-card">
+        <h3>Thông tin giao hàng</h3>
+        <p><strong>Họ tên:</strong> {{ selectedOrder.FullName }}</p>
+        <p><strong>Địa chỉ:</strong> {{ selectedOrder.Address }}</p>
+        <p><strong>Số điện thoại:</strong> {{ selectedOrder.Phone }}</p>
+      </div>
+      
+      <div class="info-card">
+        <h3>Thông tin thanh toán</h3>
+        <p><strong>Phương thức:</strong> {{ selectedOrder.PaymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản ngân hàng' }}</p>
+        <p><strong>Trạng thái:</strong> 
+          <span class="status-badge" [ngClass]="getOrderStatusClass(selectedOrder.Status)">
+            {{ selectedOrder.Status }}
+          </span>
+        </p>
+      </div>
+    </div>
+    
+    
+    
+    <div class="section-header">
+      <h3>Sản phẩm đã đặt</h3>
+    </div>
+    
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>Ảnh</th>
+          <th>Sản phẩm</th>
+          <th>Giá</th>
+          <th>Số lượng</th>
+          <th>Tổng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of orderDetails">
+          <td>
+            <img class="product-img" [src]="item.ImageURL" alt="{{ item.ProductName }}" />
+          </td>
+          <td class="product-name">{{ item.ProductName }}</td>
+          <td>{{ item.Price | currency:'VND':'symbol':'1.0-0' }}</td>
+          <td>{{ item.Quantity }}</td>
+          <td>{{ item.TotalAmount | currency:'VND':'symbol':'1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="order-summary">
+      <div class="summary-card">
+        <div class="summary-row">
+          <span>Tạm tính:</span>
+          <span>{{ getTotalAmount() | currency:'VND':'symbol':'1.0-0' }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Phí vận chuyển:</span>
+          <span>0 ₫</span>
+        </div>
+        <div class="summary-row summary-total">
+          <span>Tổng cộng:</span>
+          <span>{{ getTotalAmount() | currency:'VND':'symbol':'1.0-0' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-user-footer></app-user-footer>

@@ -1,0 +1,71 @@
+/* Container tổng */
+.container {
+    font-family:'Times New Roman', Times, serif;
+    background-color: #fffafc;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 12px rgba(255, 182, 193, 0.4);
+  }
+  
+  /* Tiêu đề */
+  h2 {
+    color: #ff69b4;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+  
+  /* Bảng */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff0f5;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+  }
+  
+  /* Header */
+  thead tr {
+    background-color: #ffc0cb;
+    color: white;
+    text-align: center;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ffe4ec;
+  }
+  
+  /* Dòng lẻ - dòng chẵn */
+  tbody tr:nth-child(even) {
+    background-color: #fdf0f5;
+  }
+  
+  /* Select dropdown */
+  select {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #ffb6c1;
+    background-color: #fff0f5;
+    font-size: 14px;
+    color: #d63384;
+  }
+  
+  /* Nút Lưu */
+  button {
+    padding: 6px 12px;
+    background-color: #ffb6c1;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #ff69b4;
+  }
+  

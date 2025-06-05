@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chỉnh Sửa Sản Phẩm</title>
+</head>
+<body>
+  <div id="container">
+    <form (ngSubmit)="updateProduct()" #productForm="ngForm">
+      <h2>Chỉnh Sửa Sản Phẩm</h2>
+
+      <!-- Tên Sản Phẩm -->
+      <div class="form-group">
+        <label for="ProductName">Tên Sản Phẩm:</label>
+        <input
+          type="text"
+          id="ProductName"
+          name="ProductName"
+          [(ngModel)]="product.ProductName"
+          class="form-control"
+          #productName="ngModel"
+          required
+        />
+        <div *ngIf="productName.invalid && productName.touched" class="error-message">
+          Tên sản phẩm không được để trống.
+        </div>
+      </div>
+
+      <!-- Danh Mục -->
+      <div class="form-group">
+        <label for="CategoryID">Danh Mục:</label>
+        <select
+          id="CategoryID"
+          name="CategoryID"
+          [(ngModel)]="product.CategoryID"
+          class="form-control"
+          #categoryID="ngModel"
+          required
+        >
+          <option *ngFor="let category of categories" [value]="category.CategoryID">
+            {{ category.CategoryName }}
+          </option>
+        </select>
+        <div *ngIf="categoryID.invalid && categoryID.touched" class="error-message">
+          Vui lòng chọn danh mục.
+        </div>
+      </div>
+
+      <!-- Mô Tả -->
+      <div class="form-group">
+        <label for="Description">Mô Tả:</label>
+        <textarea
+          id="Description"
+          name="Description"
+          [(ngModel)]="product.Description"
+          class="form-control"
+          #description="ngModel"
+          required
+        ></textarea>
+        <div *ngIf="description.invalid && description.touched" class="error-message">
+          Mô tả không được để trống.
+        </div>
+      </div>
+
+      <!-- Giá -->
+      <div class="form-group">
+        <label for="Price">Giá:</label>
+        <input
+          type="number"
+          id="Price"
+          name="Price"
+          [(ngModel)]="product.Price"
+          class="form-control"
+          #price="ngModel"
+          required
+          min="0"
+        />
+        <div *ngIf="price.invalid && price.touched" class="error-message">
+          Giá sản phẩm phải lớn hơn hoặc bằng 0.
+        </div>
+      </div>
+
+      <!-- Số Lượng -->
+      <div class="form-group">
+        <label for="Quantity">Số Lượng:</label>
+        <input
+          type="number"
+          id="Quantity"
+          name="Quantity"
+          [(ngModel)]="product.Quantity"
+          class="form-control"
+          #quantity="ngModel"
+          required
+          min="0"
+        />
+        <div *ngIf="quantity.invalid && quantity.touched" class="error-message">
+          Số lượng phải lớn hơn hoặc bằng 0.
+        </div>
+      </div>
+
+      <!-- Hình Ảnh -->
+      <div class="form-group">
+        <label for="ImageUrl">Hình Ảnh (URL):</label>
+        <input
+          type="text"
+          id="ImageUrl"
+          name="ImageUrl"
+          [(ngModel)]="product.ImageURL"
+          class="form-control"
+          #imageUrl="ngModel"
+          required
+        />
+        <div *ngIf="imageUrl.invalid && imageUrl.touched" class="error-message">
+          Hình ảnh không được để trống.
+        </div>
+      </div>
+
+      <!-- Thông Báo Lỗi -->
+      <div *ngIf="errors.length > 0" class="error-summary">
+        <ul>
+          <li *ngFor="let error of errors">{{ error }}</li>
+        </ul>
+      </div>
+
+      <!-- Nút Cập Nhật và Hủy -->
+      <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+        Cập Nhật Sản Phẩm
+      </button>
+      <button routerLink="/admin/admin-home/product-management" class="btn btn-secondary">
+        Quay Lại
+      </button>
+    </form>
+  </div>
+</body>
+</html>

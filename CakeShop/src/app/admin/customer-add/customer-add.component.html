@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thêm Khách Hàng</title>
+</head>
+<body>
+  <div id="container">
+    <form (ngSubmit)="addUser()" #customerForm="ngForm">
+        <h2>Thêm Tài Khoản</h2>
+      <div class="form-group">
+        <label for="Username">Tên Đăng Nhập:</label>
+        <input
+          type="text"
+          id="Username"
+          name="Username"
+          [(ngModel)]="user.Username"
+          class="form-control"
+          #username="ngModel"
+          required
+        />
+        <div *ngIf="username.invalid && username.touched" class="error-message">
+          Tên đăng nhập không được để trống.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="Email">Email:</label>
+        <input
+          type="email"
+          id="Email"
+          name="Email"
+          [(ngModel)]="user.Email"
+          class="form-control"
+          #email="ngModel"
+          required
+          [pattern]="'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'"
+        />
+        <div *ngIf="email.invalid && email.touched" class="error-message">
+          Email không hợp lệ.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="FullName">Họ và Tên:</label>
+        <input
+          type="text"
+          id="FullName"
+          name="FullName"
+          [(ngModel)]="user.FullName"
+          class="form-control"
+          #fullName="ngModel"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="Phone">Số Điện Thoại:</label>
+        <input
+          type="text"
+          id="Phone"
+          name="Phone"
+          [(ngModel)]="user.Phone"
+          class="form-control"
+          #phone="ngModel"
+          required
+          [pattern]="'^[0-9]{10}$'"
+        />
+        <div *ngIf="phone.invalid && phone.touched" class="error-message">
+          Số điện thoại phải gồm 10 chữ số.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="Password">Mật Khẩu:</label>
+        <input
+          type="password"
+          id="Password"
+          name="Password"
+          [(ngModel)]="user.Password"
+          class="form-control"
+          required
+        />
+        <div *ngIf="!user.Password && customerForm.submitted" class="error-message">
+          Mật khẩu không được để trống.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="Address">Địa Chỉ:</label>
+        <input
+          type="text"
+          id="Address"
+          name="Address"
+          [(ngModel)]="user.Address"
+          class="form-control"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="RoleID">Role ID:</label>
+        <input
+          type="number"
+          id="RoleID"
+          name="RoleID"
+          [(ngModel)]="user.RoleID"
+          class="form-control"
+          #roleID="ngModel"
+          required
+        />
+        <div *ngIf="roleID.invalid && roleID.touched" class="error-message">
+          Vui lòng chọn Role ID.
+        </div>
+      </div>
+  
+      <div *ngIf="errors.length > 0" class="error-summary">
+        <ul>
+          <li *ngFor="let error of errors">{{ error }}</li>
+        </ul>
+      </div>
+  
+      <button type="submit" class="btn btn-success" [disabled]="customerForm.invalid">
+        Thêm Tài Khoản
+      </button>
+      <button routerLink="/admin/admin-home/customer-management" class="btn btn-secondary">
+        Hủy
+      </button>
+    </form>
+  </div>
+</body>
+</html>
+
+  
+  

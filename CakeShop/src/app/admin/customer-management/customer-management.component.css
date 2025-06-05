@@ -1,0 +1,107 @@
+/* ======== Bố cục chung ======== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fef6f6;
+    color: #333;
+    margin: 20px;
+  }
+  
+  /* ======== Tiêu đề ======== */
+  h1 {
+    color: #ff85a2;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+  
+  /* ======== Nút bấm ======== */
+  button, a.btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+  }
+  
+  /* Nút chính */
+  .btn-primary {
+    background-color: #ffb6c1;
+    color: #fff;
+  }
+  
+  /* Nút quay lại */
+  .btn-secondary {
+    background-color: #a3d8f4;
+    color: #fff;
+  }
+  
+  /* Nút hành động */
+  .btn-info {
+    background-color: #a3d8f4;
+    color: #fff;
+  }
+  
+  .btn-warning {
+    background-color: #ffdd94;
+    color: #fff;
+  }
+  
+  .btn-danger {
+    background-color: #ff6961;
+    color: #fff;
+  }
+  
+  /* Hiệu ứng hover */
+  button:hover, a.btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+  }
+  
+  /* ======== Bảng ======== */
+  .table {
+    width: 100%;
+    background: #ffffff;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  /* Header của bảng */
+  .table thead {
+    background: #ff85a2;
+    color: white;
+  }
+  
+  .table th, .table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* Dòng lẻ màu pastel */
+  .table tbody tr:nth-child(odd) {
+    background: #ffe4e1;
+  }
+  
+  /* Dòng chẵn màu trắng */
+  .table tbody tr:nth-child(even) {
+    background: #fff;
+  }
+  
+  /* ======== Thông báo ======== */
+  .alert {
+    text-align: center;
+    background: #ffebcd;
+    color: #d2691e;
+    border: 1px solid #d2691e;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  

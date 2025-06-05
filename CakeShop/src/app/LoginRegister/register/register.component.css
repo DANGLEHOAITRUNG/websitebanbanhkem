@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #233243;
+}
+
+.container {
+    width: 500px; /* Tăng độ rộng của container */
+    max-width: 100%; /* Đảm bảo không vượt quá kích thước màn hình */
+    padding: 40px;
+    border-radius: 20px;
+    border: 8px solid #233243;
+    background: #2e3b4e;
+    color: #fff;
+    box-shadow: -5px -5px 15px rgba(255, 255, 255, .1),
+                -5px -5px 15px rgba(0, 0, 0, .35),
+                inset -5px -5px 15px rgba(255, 255, 255, .1),
+                inset -5px -5px 15px rgba(0, 0, 0, .35);
+}
+
+.form.signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.form.signup h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.inputBox {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 10px;
+    padding-left: 30px;
+    border: none;
+    outline: none;
+    background: #233243;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.inputBox i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+}
+
+.inputBox span {
+    position: absolute;
+    top: -20px;
+    left: 5px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.inputBox input[type="submit"] {
+    background: #4e8cff;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+    border-radius: 5px;
+}
+
+.inputBox input[type="submit"]:hover {
+    background: #3578e5;
+}
+
+.form.signup p {
+    color: #ccc;
+}
+
+.form.signup p a {
+    color: #4e8cff;
+    text-decoration: none;
+}
+
+.form.signup p a:hover {
+    text-decoration: underline;
+}
+/* Hiệu ứng hover cho button đăng ký */
+/* Hiệu ứng hover cho button đăng ký */
+.inputBox .submit {
+    background: #4e8cff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    margin: 0 auto; /* Căn giữa nút */
+    display: block; /* Đảm bảo button là block element để có thể căn giữa */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto; /* Hoặc bạn có thể điều chỉnh width nếu muốn */
+}
+
+.inputBox .submit:hover {
+    background: #3578e5;
+}
+
+/* Mã CSS cho các hiệu ứng lỗi khi xác thực nhập liệu */
+.inputBox input.error {
+    border: 2px solid #ff4d4d;
+}
+
+.inputBox span.error {
+    color: #ff4d4d;
+    font-size: 12px;
+    position: absolute;
+    top: 70%;
+    left: 5px;
+}
+
+/* Điều chỉnh cho các màn hình nhỏ (responsive) */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+        border-radius: 10px;
+        border: 4px solid #233243;
+        width: 90%;
+    }
+
+    .inputBox {
+        max-width: 100%;
+    }
+
+    .form.signup h2 {
+        font-size: 22px;
+    }
+
+    .inputBox input {
+        padding-left: 25px;
+    }
+
+    .inputBox .submit {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+/* Đảm bảo nội dung căn giữa trong trường hợp nhỏ màn hình */
+@media (max-width: 320px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        width: 90%;
+    }
+
+    .form.signup h2 {
+        font-size: 20px;
+    }
+}
+
+/* Hiệu ứng khi nhập liệu vào các trường */
+.inputBox input:focus {
+    border: 2px solid #4e8cff;
+}
+
+.inputBox input:focus + span {
+    color: #4e8cff;
+}
+
+/* Hiệu ứng cho các biểu tượng bên trong các trường */
+.inputBox input:focus + i {
+    color: #4e8cff;
+}

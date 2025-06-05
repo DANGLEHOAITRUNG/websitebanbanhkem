@@ -1,0 +1,150 @@
+/* Cấu trúc chính */
+body, html {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  #container {
+    width: 100%;
+    max-width: 1000px; /* Đảm bảo form không rộng quá mức */
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+  }
+  
+  /* Navbar */
+  nav {
+    background-color: #ff6ec7;
+    padding: 10px 20px;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  nav h1 {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  
+  /* Form */
+  form {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #ff6ec7;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  /* Các input và select */
+  input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ff69b4;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+    box-sizing: border-box;
+    background: #ffe4e1;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: #ff8da1;
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 105, 180, 0.4);
+  }
+  
+  /* Thông báo lỗi */
+  .error-message {
+    color: #ff4757;
+    font-size: 14px;
+    font-style: italic;
+  }
+  
+  .error-summary {
+    color: #ff4757;
+    background-color: #ffe4e1;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .error-summary ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .error-summary li {
+    margin-bottom: 5px;
+  }
+  
+  /* Nút */
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  button.btn-primary {
+    margin: 0px 100px ;
+    background-color: #ff69b4;
+    color: white;
+  }
+  
+  button.btn-primary:hover {
+    background-color: #ff6ec7;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+  }
+  
+  button.btn-secondary {
+    margin: 0px 200px ;
+    background-color: #ffb6c1;
+    color: white;
+  }
+  
+  button.btn-secondary:hover {
+    background-color: #ff8da1;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+  }
+  
+  button:disabled {
+    background-color: #f0b3c0;
+    cursor: not-allowed;
+  }
+  
+  /* Hiệu ứng cho các phần tử con */
+  input, select, textarea {
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #ff69b4;
+    background: #ffe4e1;
+    box-sizing: border-box;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    border-color: #ff8da1;
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 105, 180, 0.4);
+  }
+  

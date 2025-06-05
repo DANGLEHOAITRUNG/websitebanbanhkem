@@ -1,0 +1,16 @@
+<div id="container">
+    <div class="user-details">
+      <h2>Chi Tiết Người Dùng</h2>
+      <div *ngIf="customer">
+        <p><strong>User ID:</strong> {{ customer.UserID }}</p>
+        <p><strong>Username:</strong> {{ customer.Username }}</p>
+        <p><strong>Email:</strong> {{ customer.Email }}</p>
+        <p><strong>Full Name:</strong> {{ customer.FullName }}</p>
+        <p><strong>Phone:</strong> {{ customer.Phone }}</p>
+        <p><strong>Address:</strong> {{ customer.Address }}</p>
+        <p><strong>Role ID:</strong> {{ customer.RoleID }}</p>
+        <button routerLink="/admin/admin-home/customer-management" class="btn btn-secondary">Quay lại</button>
+      </div>
+    </div>
+  </div>
+  

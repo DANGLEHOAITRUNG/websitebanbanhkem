@@ -1,0 +1,194 @@
+<div class="container">
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1 class="page-title">Thực Đơn Bánh Ngọt</h1>
+    <p class="page-subtitle">Khám phá bộ sưu tập bánh ngọt đa dạng của chúng tôi, từ bánh kem truyền thống đến các loại bánh hiện đại sáng tạo.</p>
+  </header>
+
+  <!-- Featured Banners -->
+  <section class="featured-section">
+    <!-- Banner 1 -->
+    <div class="banner-container">
+      <div class="banner-item">
+        <div class="banner-image-container">
+          <img src="https://brodardbakery.com/wp-content/uploads/2025/03/2024-Banh-Teabreak-Brodard-6-3-410x410.png" alt="Bánh kem Trái cây nhiệt đới" class="banner-image">
+        </div>
+        <div class="banner-content">
+          <h2 class="banner-title">Bánh kem Trái cây nhiệt đới</h2>
+          <p class="banner-text">Bánh kem trái cây nhiệt đới của Brodard là một món ngọt tuyệt vời, mang đến hương vị tươi mát và thơm ngon từ các loại trái cây như cam, dâu tây, tầm bóp và xoài tươi. Với lớp kem mềm mịn, bánh không chỉ hấp dẫn về mặt thị giác mà còn gây cảm hứng cho vị giác.</p>
+          <p class="banner-text">Bánh thường được trang trí tinh tế với những lát trái cây tươi mát nhiệt đới, tạo nên một tác phẩm nghệ thuật ăn được. Đây là sự lựa chọn hoàn hảo cho các bữa tiệc, sinh nhật hay tụ họp gia đình.</p>
+          <a href="#products" class="banner-button">Khám phá ngay</a>
+        </div>
+      </div>
+      <div class="banner-thumbnails">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/47-300x300.png" alt="Bánh Kem Trái Cây Nhiệt Đới" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/46-1-300x300.png" alt="Bánh Kem Trái Cây Nhiệt Đới" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/2024-Banh-Teabreak-Brodard-6-2-300x300.png" alt="Bánh Kem Trái Cây Nhiệt Đới" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/2024-Banh-Teabreak-Brodard-7-1-300x300.png" alt="Bánh Kem Trái Cây Nhiệt Đới" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/2024-Banh-Teabreak-Brodard-7-300x300.png" alt="Bánh Kem Trái Cây Nhiệt Đới" class="thumbnail">
+      </div>
+    </div>
+  </section>
+  <!-- Filter Section -->
+  <div class="filter-section">
+    <div class="filter-group">
+      <span class="filter-label">Sắp xếp theo:</span>
+      <select class="filter-select" (change)="sortProducts($event)">
+        <option value="default">Mặc định</option>
+        <option value="price-asc">Giá: Thấp đến cao</option>
+        <option value="price-desc">Giá: Cao đến thấp</option>
+        <option value="name-asc">Tên: A-Z</option>
+        <option value="name-desc">Tên: Z-A</option>
+      </select>
+    </div>
+    
+    <div class="filter-group">
+      <span class="filter-label">Danh mục:</span>
+      <select class="filter-select" (change)="filterByCategory($event)">
+        <option value="">Tất cả danh mục</option>
+        <option *ngFor="let category of categories" [value]="category.CategoryName">
+          {{ category.CategoryName }}
+        </option>
+      </select>
+    </div>
+    
+    <div class="search-box">
+      <i class="fa fa-search search-icon"></i>
+      <input 
+        type="text" 
+        class="search-input" 
+        placeholder="Tìm kiếm sản phẩm..." 
+        [(ngModel)]="searchTerm"
+        (keyup.enter)="searchProducts()">
+    </div>
+  </div>
+  <!-- Products Section -->
+  <section id="products" class="products-section">
+    <h2 class="section-title">Sản phẩm của chúng tôi</h2>
+    
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="spinner"></div>
+      <p>Đang tải sản phẩm...</p>
+    </div>
+    
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && filteredProducts.length === 0" class="empty-state">
+      <i class="fa fa-search empty-icon"></i>
+      <h3>Không tìm thấy sản phẩm</h3>
+      <p>Không có sản phẩm nào phù hợp với tiêu chí tìm kiếm của bạn.</p>
+      <button class="btn btn-primary" (click)="resetFilters()">Xem tất cả sản phẩm</button>
+    </div>
+    
+    <!-- Product Grid -->
+    <div *ngIf="!isLoading && filteredProducts.length > 0" class="product-grid">
+      <div class="product-card" *ngFor="let product of filteredProducts">
+        <div class="product-image-container">
+          <img [src]="product.ImageURL || 'https://via.placeholder.com/300'" alt="{{ product.ProductName }}" class="product-image">
+          <span class="product-badge" *ngIf="product.IsNew">Mới</span>
+        </div>
+        <div class="product-content">
+          <div class="product-category">{{ product.CategoryName }}</div>
+          <h3 class="product-title">{{ product.ProductName }}</h3>
+          <div class="product-price">{{ product.Price | number:'1.0-0' }} VND</div>
+          <div class="product-actions">
+            <a [routerLink]="['/product-detail', product.ProductID]" class="btn btn-primary">Xem chi tiết</a>
+            <button class="btn btn-icon" (click)="addToCart(product)">
+              <i class="fa fa-shopping-cart"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pagination -->
+    <div *ngIf="totalPages > 1" class="pagination">
+      <button class="page-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+        <i class="fa fa-angle-left"></i>
+      </button>
+      
+      <button 
+        *ngFor="let page of getPageNumbers()" 
+        class="page-btn" 
+        [class.active]="page === currentPage"
+        (click)="goToPage(page)">
+        {{ page }}
+      </button>
+      
+      <button class="page-btn" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
+        <i class="fa fa-angle-right"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Second Banner -->
+  <section class="featured-section">
+    <div class="banner-container">
+      <div class="banner-item">
+        <div class="banner-content">
+          <h2 class="banner-title">Sắc Hoa Hiện Đại</h2>
+          <p class="banner-text">Bánh kem trang trí theo chủ đề "Sắc Hoa Hiện Đại" không chỉ là món ăn ngon mà còn là tác phẩm nghệ thuật độc đáo. Những bông hoa được Brodard chế tác tinh tế, mang sắc thái của các mùa như hoa hồng đỏ rực rỡ cho mùa hè, hoa mai vàng tươi thắm cho mùa xuân, hay hoa cúc thanh khiết dành cho mùa đông.</p>
+          <p class="banner-text">Đường nét mềm mại và màu sắc sống động theo những cánh hoa tươi làm cho chiếc bánh trở nên cuốn hút – sang trọng – hiện đại, không chỉ kích thích vị giác mà còn chạm đến vẻ đẹp thị giác.</p>
+          <a href="#products" class="banner-button">Khám phá ngay</a>
+        </div>
+        <div class="banner-image-container">
+          <img src="https://brodardbakery.com/wp-content/uploads/2025/03/2024-Banh-Teabreak-Brodard-8-3-410x410.png" alt="Sắc Hoa Hiện Đại" class="banner-image">
+        </div>
+      </div>
+      <div class="banner-thumbnails">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/48-1-300x300.png" alt="Sắc Hoa Hiện Đại" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/2024-Banh-Teabreak-Brodard-5-2-300x300.png" alt="Sắc Hoa Hiện Đại" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/Ban-sao-47-300x300.png" alt="Sắc Hoa Hiện Đại" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/2024-Banh-Teabreak-Brodard-300x300.png" alt="Sắc Hoa Hiện Đại" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/49-1-300x300.png" alt="Sắc Hoa Hiện Đại" class="thumbnail">
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section class="testimonial-section">
+    <div class="testimonial-container">
+      <div class="testimonial-background"></div>
+      <div class="testimonial-content">
+        <img src="https://th.bing.com/th/id/OIP.CfjwItjNaprcFge4CBfb4gHaHa?w=187&h=187&c=7&r=0&o=5&dpr=1.6&pid=1.7" alt="Đặng Lê Hoài Trung" class="testimonial-image">
+        <div class="testimonial-text">
+          <p class="testimonial-quote">Bánh này thực sự rất ngon! Hương vị tươi mát từ trái cây kết hợp với lớp kem mịn màng tạo nên một trải nghiệm tuyệt vời. Sẽ đặt mua lại lần nữa!</p>
+          <h3 class="testimonial-author">Đặng Lê Hoài Trung</h3>
+          <p class="testimonial-role">Khách hàng thân thiết</p>
+          <div class="testimonial-rating">
+            <i class="fa fa-star star"></i>
+            <i class="fa fa-star star"></i>
+            <i class="fa fa-star star"></i>
+            <i class="fa fa-star star"></i>
+            <i class="fa fa-star-half-o star"></i>
+            <span>(4.5/5)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Third Banner -->
+  <section class="featured-section">
+    <div class="banner-container">
+      <div class="banner-item">
+        <div class="banner-image-container">
+          <img src="https://brodardbakery.com/wp-content/uploads/2025/03/2024-Banh-Teabreak-Brodard-15-600x398.png" alt="Bánh Mousse" class="banner-image">
+        </div>
+        <div class="banner-content">
+          <h2 class="banner-title">Bánh Mousse béo mịn chiều lòng mọi thực khách</h2>
+          <p class="banner-text">Chiếc bánh Mousse trái cây mới của Brodard là một tác phẩm nghệ thuật ăn uống, kết hợp giữa hương vị tươi mát và độ mềm mịn tuyệt vời. Bánh được làm từ lớp mousse dừa béo thơm hương vị phô mai, hòa quyện hoàn hảo với các loại trái cây tươi đặc trưng mang lại trải nghiệm ngọt ngào và thanh mát cho thực khách.</p>
+          <p class="banner-text">Sự đổi mới không ngừng từ dòng bánh Mousse truyền thống cách tân cùng lớp trái cây mang vị chua ngọt hấp dẫn. Là lựa chọn hoàn hảo cho mùa hè, chiếc bánh không chỉ ngon mà còn đẹp mắt, xứng đáng để thưởng thức.</p>
+          <a href="#products" class="banner-button">Khám phá ngay</a>
+        </div>
+      </div>
+      <div class="banner-thumbnails">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/39-1-300x300.png" alt="Bánh Mousse" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/40-2-300x300.png" alt="Bánh Mousse" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/03/2024-Banh-Teabreak-Brodard-10-1-300x300.png" alt="Bánh Mousse" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/02/2024-Banh-Teabreak-Brodard-4-300x300.png" alt="Bánh Mousse" class="thumbnail">
+        <img src="https://brodardbakery.com/wp-content/uploads/2025/02/2024-Banh-Teabreak-Brodard-1-300x300.png" alt="Bánh Mousse" class="thumbnail">
+      </div>
+    </div>
+  </section>
+</div>

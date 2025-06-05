@@ -1,0 +1,163 @@
+/* Cấu trúc chính */
+body, html {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f8d7e0, #ffd1dc);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Tiêu đề */
+h2 {
+  color: #ff6ec7;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Nút thêm sản phẩm */
+button.btn-primary {
+  background-color: #ff8da1;
+  border: 1px solid #ff69b4;
+  color: white;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button.btn-primary:hover {
+  background-color: #ff69b4;
+  transform: scale(1.05);
+  box-shadow: 0px 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+/* Bảng sản phẩm */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 15px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  max-width: 100%;
+  background-color: #ffb6c1;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 12px 18px;
+  text-align: center;
+  border: 1px solid #ffdde1;
+  font-size: 16px;
+  color: #333;
+}
+
+td {
+  background: #fff0f5;
+}
+
+/* Cải thiện hình ảnh sản phẩm */
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-image:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/* Hiệu ứng hover cho các dòng sản phẩm */
+tbody tr:hover {
+  background-color: #ffe4e1;
+  transform: scale(1.02);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Nút hành động */
+.btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-sm {
+  display: flex;
+  font-size: 14px;
+}
+
+.btn-warning {
+  background-color: #ffcc00;
+  color: white;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #ffb200;
+  transform: scale(1.05);
+  box-shadow: 0px 2px 8px rgba(255, 193, 7, 0.4);
+}
+
+.btn-danger {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #ff4757;
+  transform: scale(1.05);
+  box-shadow: 0px 2px 8px rgba(255, 71, 87, 0.4);
+}
+
+/* Nút Xóa hover */
+button.btn-danger:hover {
+  background-color: #ff4757;
+  box-shadow: 0px 2px 8px rgba(255, 71, 87, 0.5);
+  transform: scale(1.05);
+}
+
+/* Bảng và nút được bo tròn */
+.table-container {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Nâng cao cho phần tử không có ảnh */
+ng-template {
+  font-style: italic;
+  color: #ff6b6b;
+  font-size: 14px;
+}
+
