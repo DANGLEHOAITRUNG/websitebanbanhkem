@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "Hash": "9vf17z+1WwlJzKN23Xmcq8J3IeTvuZR9PGlauTQdBt0=",
+  "Source": "CakeShop_BE",
+  "BasePath": "_content/CakeShop_BE",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CakeShop_BE\\wwwroot",
+      "Source": "CakeShop_BE",
+      "ContentRoot": "C:\\TTCNganh_WBKem\\CakeShop_BE\\CakeShop_BE\\wwwroot\\",
+      "BasePath": "_content/CakeShop_BE",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\TTCNganh_WBKem\\CakeShop_BE\\CakeShop_BE\\wwwroot\\uploads\\payment-proofs\\2e4db3d4-5c25-4c53-af72-8f40db81241d.png",
+      "SourceId": "CakeShop_BE",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\TTCNganh_WBKem\\CakeShop_BE\\CakeShop_BE\\wwwroot\\",
+      "BasePath": "_content/CakeShop_BE",
+      "RelativePath": "uploads/payment-proofs/2e4db3d4-5c25-4c53-af72-8f40db81241d.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\payment-proofs\\2e4db3d4-5c25-4c53-af72-8f40db81241d.png"
+    },
+    {
+      "Identity": "C:\\TTCNganh_WBKem\\CakeShop_BE\\CakeShop_BE\\wwwroot\\uploads\\payment-proofs\\ed2304cf-7db0-4f6d-90e7-d71360cf404f.png",
+      "SourceId": "CakeShop_BE",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\TTCNganh_WBKem\\CakeShop_BE\\CakeShop_BE\\wwwroot\\",
+      "BasePath": "_content/CakeShop_BE",
+      "RelativePath": "uploads/payment-proofs/ed2304cf-7db0-4f6d-90e7-d71360cf404f.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\payment-proofs\\ed2304cf-7db0-4f6d-90e7-d71360cf404f.png"
+    }
+  ]
+}
